@@ -1,0 +1,80 @@
+<!Doctype html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		canvas{
+			border: solid;
+		}
+	</style>
+</head>
+<body>
+	<canvas id='micanvas'>
+			Tu navegador no soporta canvas
+	</canvas>
+	<input type="button" value="Iniciar" id="boton">
+	<script>
+
+		var velocidad = 15, direccion = velocidad, iniciar = false, x =50, y = 10;
+		var intervalo;
+
+		window.addEventListener('load', init);
+		function init(){
+
+				var canvas = document.getElementById('micanvas');
+				var ctx = canvas.getContext('2d');
+
+				ctx.fillStyle = 'rgb(200,0,0)';
+				ctx.arc(x,y,10,0,7);
+				ctx.fill();
+
+				document.getElementById('boton').addEventListener('click', function(){
+
+					if (iniciar) 
+						{
+							this.value = 'Iniciar';
+							window.clearInterval(intervalo);
+							iniciar = false;
+						}
+					else
+					{
+						this.value = 'Detener';
+						intervalo = window.setInterval(function(){
+								moveAndDraw(canvas,ctx);
+							},32 );
+
+						iniciar = true;
+					}
+				});
+			}
+			
+			function draw(canvas,ctx,x,y)
+			{
+				canvas.width = canvas.width;//borrar canvas
+				ctx.fillStyle = 'rgb(200,0,0)';//Para recuperar el contexto
+				ctx.arc(x,y,10,0,7);
+
+				ctx.fill();
+			}
+			function moveAndDraw(canvas, ctx){
+
+				if(y > (canvas.height - 20)) 
+				{
+					direccion = -velocidad;
+				}
+
+				if(y < (20)) 
+				{
+					direccion = velocidad;
+				}
+				
+
+				y += direccion;
+				draw(canvas,ctx,x,y);
+
+				
+			}
+	</script>
+</body>
+
+</html>

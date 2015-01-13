@@ -1,0 +1,22 @@
+<!Doctype html>
+<html>
+<head>
+	<title></title>
+	
+</head>
+<body>
+
+	<script>
+		window.addEventListener('load', init);
+		function init(){
+
+			var intervalo = window.setInterval(function(){console.log("Intervalo");},1000);
+
+
+			setTimeout(function(){window.clearInterval(intervalo);},10000);
+	}
+			
+	</script>
+</body>
+
+</html>
